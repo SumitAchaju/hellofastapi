@@ -1,0 +1,1 @@
+cd backend && docker volume create fastapi-files && docker volume create mangodata && docker volume create postgresdata && docker compose up -d && cd ../ui && npm i && npm run devcd backend && docker volume create fastapi-files && docker volume create mangodata && docker volume create postgresdata && docker compose up -d && cd ../ui && npm i && npm run dev
