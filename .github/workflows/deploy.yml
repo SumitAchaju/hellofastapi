@@ -14,19 +14,18 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem
-          chmod 600 ec2_key.pem
+            mkdir -p ~/.ssh
+            echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Rsync files to EC2
         run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ec2_key.pem" \
-            --exclude=".git" \
-            --exclude=".github" \
-            ./ ${{ secrets.EC2_HOST }}:/home/ec2-user/app
+          rsync -az --delete ./ ${{ secrets.EC2_HOST }}:/home/ec2-user/app
 
       - name: Restart app on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_HOST }} << 'EOF'
+          ssh ${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ec2-user/app
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d --build
