@@ -19,6 +19,9 @@ jobs:
             chmod 600 ~/.ssh/id_rsa
             ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+      - name: test SSH Connection
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} "echo 'SSH connection successful'"
+
       - name: Rsync files to EC2
         run: |
           rsync -az --delete ./ ${{ secrets.EC2_HOST }}:/home/ec2-user/app
