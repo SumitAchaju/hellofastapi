@@ -1,0 +1,33 @@
+name: Deploy to EC2 with rsync
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem
+          chmod 600 ec2_key.pem
+
+      - name: Rsync files to EC2
+        run: |
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ec2_key.pem" \
+            --exclude=".git" \
+            --exclude=".github" \
+            ./ ${{ secrets.EC2_HOST }}:/home/ec2-user/app
+
+      - name: Restart app on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ec2-user/app
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d --build
+          EOF

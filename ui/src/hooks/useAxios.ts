@@ -4,8 +4,8 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useContext } from "react";
 import AuthContext from "../context/Auth";
+import { baseUrl as BaseUrl }  from "../utils/apiurl";
 
-const BaseUrl = "http://localhost";
 
 let isTokenRefreshing = false;
 let newTokenPromise: Promise<AxiosResponse<any, any>> | null = null;

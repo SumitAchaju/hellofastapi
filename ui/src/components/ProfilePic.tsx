@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import { baseUrl } from "../utils/apiurl";
 
 type Props = {
   image?: string;
@@ -28,7 +29,7 @@ export default function ProfilePic({
         className="rounded-full w-full h-full object-cover"
         src={
           image === undefined
-            ? "/src/assets/profile/default_profile.jpg"
+            ? `${baseUrl}/files/profile/default_profile.jpg`
             : image
         }
         alt="profile"

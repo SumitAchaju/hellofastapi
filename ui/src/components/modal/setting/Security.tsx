@@ -13,7 +13,7 @@ export default function Security({}: Props) {
   const updateUsernameMutation = useMutation({
     mutationKey: ["updateUsername"],
     mutationFn: async (data: { username: string; password: string }) => {
-      const res = await api.put("/account/updateusername", data);
+      const res = await api.put("/api/v1/user/updateusername/", data);
       return res.data;
     },
     onSettled: () => {

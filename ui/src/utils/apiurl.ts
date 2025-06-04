@@ -1,3 +1,4 @@
+export const baseUrl = "http://localhost"
 export const initalTag = "api";
 export const apiVersion = "v1";
 export const baseTag = `${initalTag}/${apiVersion}`;
