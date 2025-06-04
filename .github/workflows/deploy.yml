@@ -14,13 +14,11 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-            mkdir -p ~/.ssh
-            echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+            echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem && chmod 600 ec2_key.pem
+            
 
       - name: test SSH Connection
-        run: ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} "echo 'SSH connection successful'"
+        run: ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_HOST }} "echo 'SSH connection successful'"
 
       - name: Rsync files to EC2
         run: |
