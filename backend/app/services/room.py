@@ -10,6 +10,8 @@ async def create_room(
     query = {"users.user_id": {"$all": room_users}}
     room = await mangodb.find_one(Room, query)
 
+    print("room data: --------------",room)
+
     if not room:
         new_room = Room(
             users=[
