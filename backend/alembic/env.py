@@ -27,7 +27,7 @@ target_metadata = [Base.metadata]
 
 def get_url():
     # return env_value.get("DATABASE_URL")
-    return "postgresql+asyncpg://main:hard@localhost:5432/fastapi"
+    return "postgresql+asyncpg://main:hard@postgres:5432/fastapi"
 
 
 def run_migrations_offline():
