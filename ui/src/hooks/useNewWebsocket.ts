@@ -13,7 +13,7 @@ type Props = {
   options?: Options;
 };
 
-const BaseWebsocketUrl = "ws://localhost/ws";
+const BaseWebsocketUrl = "ws://ec2-54-85-121-209.compute-1.amazonaws.com/ws";
 
 export default function useNewWebsocket({
   url,
