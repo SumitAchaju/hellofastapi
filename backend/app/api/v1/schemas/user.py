@@ -6,7 +6,6 @@ from pydantic import (
     field_validator,
     Field,
     StringConstraints,
-    HttpUrl,
 )
 
 stringType = Annotated[
@@ -72,7 +71,7 @@ class UserModel(BaseModel):
     id: int
     uid: str
     username: usernameType
-    profile: HttpUrl
+    profile: str
     email: EmailStr
     first_name: stringType
     last_name: stringType
