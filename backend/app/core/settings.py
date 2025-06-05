@@ -1,10 +1,9 @@
 import os
 from datetime import timedelta
 
-from dotenv import find_dotenv, dotenv_values
+from dotenv import load_dotenv
 
-env_path = find_dotenv()
-config = dotenv_values(env_path)
+load_dotenv()
 
 HOSTNAME = "http://127.0.0.1:80"
 
@@ -12,15 +11,15 @@ BASE_DIR = os.path.abspath(__file__)
 
 DEBUG = False
 
-DATABASE = {"URL": config["DATABASE_URL"], "MANGODB_URL": config["MANGODB_URL"]}
+DATABASE = {"URL": os.getenv("DATABASE_URL"), "MANGODB_URL": os.getenv("MANGODB_URL")}
 
-SUPER_USER = {"ACCESS_PASSWORD": config["CREATE_SUPERUSER_PASSWORD"]}
+SUPER_USER = {"ACCESS_PASSWORD": os.getenv("CREATE_SUPERUSER_PASSWORD")}
 
 # For Token Authentication
 JWT = {
     "ACCESS_TOKEN_EXPIRES": timedelta(minutes=25),
     "REFRESH_TOKEN_EXPIRES": timedelta(days=30),
-    "SECRET_KEY": config["SECRET_KEY"],
+    "SECRET_KEY": os.getenv("SECRET_KEY"),
     "ALGORITHM": "HS256",
 }
 
