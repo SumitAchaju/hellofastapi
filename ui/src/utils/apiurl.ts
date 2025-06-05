@@ -1,4 +1,4 @@
-export const baseUrl = "http://ec2-54-164-67-190.compute-1.amazonaws.com"
+export const baseUrl = "http://ec2-52-73-151-151.compute-1.amazonaws.com"
 export const initalTag = "api";
 export const apiVersion = "v1";
 export const baseTag = `${initalTag}/${apiVersion}`;

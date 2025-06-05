@@ -7,7 +7,7 @@ from starlette import status
 
 from app.api.v1.schemas.user import CreateUserRequest, UpdateUserRequest
 from app.api.v1.schemas.user import FriendSearch
-from app.core.settings import SUPER_USER, HOSTNAME, STATIC
+from app.core.settings import SUPER_USER, STATIC
 from app.db.postgres.models.user import User
 from .auth import bcrypt_context
 from app.extra.query import UserQuery
@@ -29,7 +29,7 @@ async def create_user(postgres: AsyncSession, user_data: CreateUserRequest):
     superuser_pass = user.pop("superuser_pass")
     password = user.pop("password")
 
-    user["profile"] = f"{HOSTNAME}/{STATIC}/profile/default_profile.jpg"
+    user["profile"] = f"/{STATIC}/profile/default_profile.jpg"
 
     if superuser_pass and superuser_pass == SUPER_USER["ACCESS_PASSWORD"]:
         is_superuser = True

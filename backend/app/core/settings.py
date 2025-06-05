@@ -6,7 +6,7 @@ from dotenv import find_dotenv, dotenv_values
 env_path = find_dotenv()
 config = dotenv_values(env_path)
 
-HOSTNAME = "http://127.0.0.1:80"
+HOSTNAME = "http://ec2-52-73-151-151.compute-1.amazonaws.com"
 
 BASE_DIR = os.path.abspath(__file__)
 
