@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Switch from "../../Switch";
 import ProfilePic from "../../ProfilePic";
-import { baseUrl } from "../../../utils/apiurl";
 
 type Props = {};
 
@@ -35,7 +34,6 @@ function MuteFriend() {
     <div className="flex items-center justify-between">
       <div className="flex gap-2 items-center">
         <ProfilePic
-          image={`${baseUrl}/files/profile/default_profile.jpg`}
           circle={false}
           active={false}
           size={40}
