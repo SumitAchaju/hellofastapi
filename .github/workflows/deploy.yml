@@ -22,7 +22,7 @@ jobs:
 
       - name: Rsync files to EC2
         run: |
-          rsync -avz -e "ssh -i ec2_key.pem -o StrictHostKeyChecking=no" ./ ${{ secrets.EC2_HOST }}:/app
+          rsync -avz -e "ssh -i ec2_key.pem -o StrictHostKeyChecking=no" ./ ${{ secrets.EC2_HOST }}:/home/ec2-user/app --exclude '.git' --exclude 'docker-compose.dev.yml'
       - name: Restart app on EC2
         run: |
           ssh ${{ secrets.EC2_HOST }} << 'EOF'
