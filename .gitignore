@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
 
 .idea
 __pycache__
