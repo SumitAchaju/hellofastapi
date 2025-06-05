@@ -45,7 +45,7 @@ services:
     volumes:
       - type: volume
         source: fastapi-files
-        target: /home/ec2-user/app/backend/files
+        target: /usr/src/files/
 
     depends_on:
       - mongo
