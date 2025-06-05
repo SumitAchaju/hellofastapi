@@ -1,6 +1,7 @@
 import toast, { Toast } from "react-hot-toast";
 import { AxiosError } from "../../hooks/useAxios";
 import { userType } from "../../types/fetchTypes";
+import { baseUrl } from "../../utils/apiurl";
 
 type toastConfigType = Partial<
   Pick<
@@ -99,7 +100,7 @@ export const notifyMsg = (msg: string, senderUser: userType | undefined) => {
             <div className="flex-shrink-0 pt-0.5">
               <img
                 className="h-12 w-12 rounded-full object-cover"
-                src={senderUser?.profile}
+                src={baseUrl+"/"+senderUser?.profile}
                 alt=""
               />
             </div>
