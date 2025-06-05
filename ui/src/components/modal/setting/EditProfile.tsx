@@ -32,7 +32,7 @@ export default function EditProfile({}: Props) {
     mutationFn: async (file: File) => {
       const formData = new FormData();
       formData.append("uploaded_file", file as Blob);
-      const res = await api.post("/account/upload/profile", formData, {
+      const res = await api.post("/api/v1/user/upload/profile/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Access-Control-Allow-Origin": "*",
