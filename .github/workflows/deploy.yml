@@ -14,7 +14,7 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-            echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem && chmod 600 ec2_key.pem && cat ec2_key.pem
+            echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem && chmod 400 ec2_key.pem
             
 
       - name: test SSH Connection
@@ -28,6 +28,7 @@ jobs:
         run: |
           ssh ${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ec2-user/app
+            docker volume create fastapi-files && docker volume create mangodata && docker volume create postgresdata
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d --build
           EOF
