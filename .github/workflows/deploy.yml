@@ -27,6 +27,9 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ec2-user/app
+            cd backend
+            mkdir files
+            cd ../
             docker volume create fastapi-files && docker volume create mangodata && docker volume create postgresdata
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d --build
