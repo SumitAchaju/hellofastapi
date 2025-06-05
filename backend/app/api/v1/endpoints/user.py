@@ -1,5 +1,4 @@
 from uuid import uuid4
-import os
 
 from PIL import Image
 from fastapi import APIRouter, Request, HTTPException, UploadFile, File
@@ -87,9 +86,6 @@ async def upload_file(
 ):
     file_name = str(uuid4()) + "." + uploaded_file.filename
     path = f"{settings.STATIC}/profile/{file_name}"
-
-    if not os.path.exists(path):
-        os.makedirs(path)
 
     with Image.open(uploaded_file.file) as img:
         resize_image(img, (300, 300)).save(path)
