@@ -91,7 +91,7 @@ async def upload_file(
         resize_image(img, (300, 300)).save(path)
 
     user = await UserQuery.one(db, request.user.id)
-    user.profile = settings.HOSTNAME + "/" + path
+    user.profile = path
     await db.commit()
 
     return {

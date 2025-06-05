@@ -30,7 +30,7 @@ export default function ProfilePic({
         src={
           image === undefined
             ? `${baseUrl}/files/profile/default_profile.jpg`
-            : image
+            : `${baseUrl}/${image}`
         }
         alt="profile"
       />
