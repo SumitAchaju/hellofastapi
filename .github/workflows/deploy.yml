@@ -18,7 +18,7 @@ jobs:
             
 
       - name: test SSH Connection
-        run:  ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts && ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_HOST }} "echo 'SSH connection successful'"
+        run:  ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_HOST }} "echo 'SSH connection successful'"
 
       - name: Rsync files to EC2
         run: |
